@@ -25,15 +25,52 @@ namespace SchoolDataBase
             }
         }
 
+        public  void SaveChanges()
+        {
+             dbSchoolContext.SaveChangesAsync();
+        }
+        public IList<Department> getDepartments()
+        {
+            return dbSchoolContext.Departments.Include(d => d.Administrator).ToList<Department>();
+        }
+
+
+        public Department getDepartment(int id)
+        {
+            return dbSchoolContext.Departments.Find(id);
+        }
+        public void addDepartment(Department department) {
+            dbSchoolContext.Departments.Add(department);
+        }
+        public void updDepartment(Department department)
+        {
+            dbSchoolContext.Entry(department).State = EntityState.Modified;
+        }
+
+        public void removeDepartament(int id)
+        {
+            Department department = dbSchoolContext.Departments.Find(id);
+            dbSchoolContext.Departments.Remove(department);
+        }
         public IList<Course> getCourses()
         {
             return dbSchoolContext.Courses.ToList<Course>();
 
         }
-
         public Course getCourse(int courseID)
         {
             return dbSchoolContext.Courses.Where(x => x.CourseID == courseID).FirstOrDefault<Course>();
         }
+        public IList<Person> getPeople()
+        {
+            return dbSchoolContext.People.ToList<Person>();
+
+        }
+        public Person getPerson(int PersonID)
+        {
+            return dbSchoolContext.People.Where(x => x.PersonID == PersonID).FirstOrDefault<Person>();
+        }
+
+
     }
 }

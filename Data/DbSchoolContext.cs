@@ -12,13 +12,18 @@ namespace SchoolDataBase
         {
             
         }
+        //TODO: solo para testeos
+        public DbSchoolContext()
+            : base(@"data source=(localdb)\MSSQLLocalDB;initial catalog=School;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework")
+        {
 
+        }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<OfficeAssignment> OfficeAssignments { get; set; }
         public virtual DbSet<OnlineCourse> OnlineCourses { get; set; }
         public virtual DbSet<OnsiteCourse> OnsiteCourses { get; set; }
-        public virtual DbSet<Person> Instructors { get; set; }
+        public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<StudentGrade> StudentGrades { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -38,20 +43,15 @@ namespace SchoolDataBase
 
             modelBuilder.Entity<Course>()
                 .HasMany(e => e.Instructors)
-                .WithMany(e => e.Courses)
+                .WithMany(e => e.Course)
                 .Map(m => m.ToTable("CourseInstructor").MapLeftKey("CourseID").MapRightKey("PersonID"));
-
-            //modelBuilder.Entity<Course>()
-            //    .HasMany(e => e.Student)
-            //    .WithMany(e => e.Courses)
-            //    .Map(m => m.ToTable("StudentGrade").MapLeftKey("CourseID").MapRightKey("PersonID"));
 
             modelBuilder.Entity<Department>()
                 .Property(e => e.Budget)
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<Department>()
-                .HasMany(e => e.Courses)
+                .HasMany(e => e.Course)
                 .WithRequired(e => e.Department)
                 .WillCascadeOnDelete(false);
 
@@ -60,11 +60,16 @@ namespace SchoolDataBase
                 .IsFixedLength();
 
             modelBuilder.Entity<Person>()
+                .HasMany(e => e.Department)
+                .WithOptional(e => e.Administrator)
+                .HasForeignKey(e => e.AdministratorID);
+
+            modelBuilder.Entity<Person>()
                 .HasOptional(e => e.OfficeAssignment)
                 .WithRequired(e => e.Person);
 
             modelBuilder.Entity<Person>()
-                .HasMany(e => e.StudentGrades)
+                .HasMany(e => e.StudentGrade)
                 .WithRequired(e => e.Person)
                 .HasForeignKey(e => e.StudentID)
                 .WillCascadeOnDelete(false);

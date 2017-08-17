@@ -12,7 +12,7 @@ namespace SchoolDataBase
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
-            Courses = new HashSet<Course>();
+            Course = new HashSet<Course>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -27,9 +27,13 @@ namespace SchoolDataBase
 
         public DateTime StartDate { get; set; }
 
-        public int? Administrator { get; set; }
+        public int? AdministratorID { get; set; }
+
+        //public Person Administrator { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Course> Course { get; set; }
+
+        public virtual Person Administrator { get; set; }
     }
 }

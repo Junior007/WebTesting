@@ -1,0 +1,83 @@
+﻿@model SchoolDataBase.Course
+
+@{
+    ViewBag.Title = "StudentGradesPerCourse";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<div>
+    <h3>Course</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Credits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Credits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentID)
+        </dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Back to course", "Course", new { CourseID = Model.CourseID })
+</p>
+
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                LastName
+            </th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                Grade
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.StudentGrades)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Person.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Person.FirstName)   
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EnrollmentID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EnrollmentID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EnrollmentID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

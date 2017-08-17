@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolDataBase", "Data\SchoolDataBase.csproj", "{EC35DB9F-FEBA-4388-A75F-9C33317294E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{AC6DB55B-0472-4132-B93B-EB8C4496293A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Tests", "Web.Tests\Web.Tests.csproj", "{9A4B01B1-6CB1-41B3-8146-89F664FC9BEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC35DB9F-FEBA-4388-A75F-9C33317294E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC35DB9F-FEBA-4388-A75F-9C33317294E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC35DB9F-FEBA-4388-A75F-9C33317294E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC35DB9F-FEBA-4388-A75F-9C33317294E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC6DB55B-0472-4132-B93B-EB8C4496293A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC6DB55B-0472-4132-B93B-EB8C4496293A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC6DB55B-0472-4132-B93B-EB8C4496293A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC6DB55B-0472-4132-B93B-EB8C4496293A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A4B01B1-6CB1-41B3-8146-89F664FC9BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A4B01B1-6CB1-41B3-8146-89F664FC9BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A4B01B1-6CB1-41B3-8146-89F664FC9BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A4B01B1-6CB1-41B3-8146-89F664FC9BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

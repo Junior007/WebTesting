@@ -12,8 +12,9 @@ namespace SchoolDataBase
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Person()
         {
-            StudentGrades = new HashSet<StudentGrade>();
-            Courses = new HashSet<Course>();
+            Department = new HashSet<Department>();
+            StudentGrade = new HashSet<StudentGrade>();
+            Course = new HashSet<Course>();
         }
 
         public int PersonID { get; set; }
@@ -30,12 +31,15 @@ namespace SchoolDataBase
 
         public DateTime? EnrollmentDate { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Department { get; set; }
+
         public virtual OfficeAssignment OfficeAssignment { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StudentGrade> StudentGrades { get; set; }
+        public virtual ICollection<StudentGrade> StudentGrade { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Course> Course { get; set; }
     }
 }

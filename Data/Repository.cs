@@ -7,6 +7,7 @@ using System.Data.Entity;
 //using System.Data.Objects;
 //using System.Data.Objects.DataClasses;
 //https://msdn.microsoft.com/es-es/library/bb399731(v=vs.100).aspx
+
 namespace SchoolDataBase
 {
     public class Repository
@@ -27,7 +28,7 @@ namespace SchoolDataBase
 
         public  void SaveChanges()
         {
-             dbSchoolContext.SaveChangesAsync();
+             dbSchoolContext.SaveChanges();
         }
         public IList<Department> getDepartments()
         {
@@ -60,6 +61,19 @@ namespace SchoolDataBase
         public Course getCourse(int courseID)
         {
             return dbSchoolContext.Courses.Where(x => x.CourseID == courseID).FirstOrDefault<Course>();
+        }
+        public void addCourse(Course course)
+        {
+            dbSchoolContext.Courses.Add(course);
+        }
+        public void updCourse(Course course)
+        {
+            dbSchoolContext.Entry(course).State = EntityState.Modified;
+        }
+        public void removeCourse(int id)
+        {
+            Course course = dbSchoolContext.Courses.Find(id);
+            dbSchoolContext.Courses.Remove(course);
         }
         public IList<Person> getPeople()
         {

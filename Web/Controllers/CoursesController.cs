@@ -14,26 +14,32 @@ namespace Web.Controllers
     public class CoursesController : Controller
     {
         private DbSchoolContext db = new DbSchoolContext();
-
+        //private DbSchoolContext db = new DbSchoolContext();
+        private Repository repository = new SchoolDataBase.Repository();
         public ActionResult Index()
         {
             return RedirectToAction("List");
         }
         // GET: Courses
-        public async Task<ActionResult> List()
+        public ActionResult List()
         {
+            /*
             var courses = db.Courses.Include(c => c.Department).Include(c => c.OnlineCourse).Include(c => c.OnsiteCourse);
             return View(await courses.ToListAsync());
+            */
+            
+            var courses = repository.getCourses();
+            return View(courses);
         }
 
         // GET: Courses/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public  ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = await db.Courses.FindAsync(id);
+            Course course = repository.getCourse((int)id);// await db.Courses.FindAsync(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -55,12 +61,14 @@ namespace Web.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")] Course course)
+        public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")] Course course)
         {
             if (ModelState.IsValid)
             {
-                db.Courses.Add(course);
-                await db.SaveChangesAsync();
+                //db.Courses.Add(course);
+                //await db.SaveChangesAsync();
+                repository.addCourse(course);
+                repository.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -71,13 +79,13 @@ namespace Web.Controllers
         }
 
         // GET: Courses/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = await db.Courses.FindAsync(id);
+            Course course = repository.getCourse((int)id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -93,12 +101,15 @@ namespace Web.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "CourseID,Title,Credits,DepartmentID")] Course course)
+        public ActionResult Edit([Bind(Include = "CourseID,Title,Credits,DepartmentID")] Course course)
         {
             if (ModelState.IsValid)
             {
+                repository.updCourse(course);
+                /*
                 db.Entry(course).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+                */
                 return RedirectToAction("Index");
             }
             ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "Name", course.DepartmentID);
@@ -108,13 +119,13 @@ namespace Web.Controllers
         }
 
         // GET: Courses/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = await db.Courses.FindAsync(id);
+            Course course = repository.getCourse((int)id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -150,6 +161,7 @@ namespace Web.Controllers
             var course = repository.getCourse(id);
             return View(course);
         }
+        /*
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -157,6 +169,6 @@ namespace Web.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }
